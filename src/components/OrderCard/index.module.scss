@@ -114,3 +114,105 @@
   color: $color-error;
   font-weight: $font-weight-bold;
 }
+
+.urgentTag {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background: #fef3e2;
+  color: #e67e22;
+  font-size: $font-size-xs;
+  border-radius: $radius-xs;
+  align-self: flex-start;
+}
+
+.feeSection {
+  padding-top: $spacing-md;
+}
+
+.feeDivider {
+  height: 1rpx;
+  background: $color-divider;
+  margin-bottom: $spacing-md;
+}
+
+.feeTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.feeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8rpx 0;
+}
+
+.feeLabelWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.feeLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.feeRemark {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.feeAmount {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.feeTotalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $spacing-md;
+  margin-top: $spacing-sm;
+  border-top: 1rpx dashed rgba(201, 169, 98, 0.3);
+}
+
+.feeTotalLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.feeTotalAmount {
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: $color-error;
+}
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.expandBtn {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 8rpx 16rpx;
+  background: rgba(201, 169, 98, 0.08);
+  border-radius: $radius-xs;
+}
+
+.expandText {
+  font-size: $font-size-xs;
+  color: $color-gold;
+}
+
+.expandArrow {
+  font-size: 18rpx;
+  color: $color-gold;
+}

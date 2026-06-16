@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
-import { installationList } from '@/data/installations';
+import { useInstallationStore } from '@/store/installations';
 import StatusTag from '@/components/StatusTag';
 import { Installation, INSTALL_STATUS_MAP } from '@/types';
 import styles from './index.module.scss';
@@ -15,13 +15,14 @@ const statusTabs = [
 
 const InstallPage: React.FC = () => {
   const [activeStatus, setActiveStatus] = useState<string>('all');
+  const installations = useInstallationStore((s) => s.installations);
 
   useDidShow(() => {
     console.log('[InstallPage] 页面显示');
   });
 
   const filteredInstallations = useMemo<Installation[]>(() => {
-    let result = [...installationList];
+    let result = [...installations];
     
     if (activeStatus !== 'all') {
       result = result.filter(item => item.status === activeStatus);
@@ -30,16 +31,16 @@ const InstallPage: React.FC = () => {
     return result.sort((a, b) => 
       new Date(b.scheduledDate).getTime() - new Date(a.scheduledDate).getTime()
     );
-  }, [activeStatus]);
+  }, [activeStatus, installations]);
 
   const stats = useMemo(() => {
     return {
-      total: installationList.length,
-      pending: installationList.filter(i => i.status === 'pending').length,
-      scheduled: installationList.filter(i => i.status === 'scheduled').length,
-      completed: installationList.filter(i => i.status === 'completed').length
+      total: installations.length,
+      pending: installations.filter(i => i.status === 'pending').length,
+      scheduled: installations.filter(i => i.status === 'scheduled').length,
+      completed: installations.filter(i => i.status === 'completed').length
     };
-  }, []);
+  }, [installations]);
 
   const handleCardClick = (id: string) => {
     Taro.navigateTo({ url: `/pages/install-detail/index?id=${id}` });
@@ -47,8 +48,12 @@ const InstallPage: React.FC = () => {
 
   const handleReserve = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
-    console.log('[InstallPage] 预约安装:', id);
-    Taro.showToast({ title: '预约功能开发中', icon: 'none' });
+    const install = installations.find(i => i.id === id);
+    if (install && install.orderId) {
+      Taro.navigateTo({ url: `/pages/order-detail/index?id=${install.orderId}` });
+    } else {
+      Taro.showToast({ title: '请从订单详情预约安装', icon: 'none' });
+    }
   };
 
   const goToCemetery = () => {

@@ -3,6 +3,7 @@ import { Installation, Cemetery, SettlementItem } from '@/types';
 export const installationList: Installation[] = [
   {
     id: '1',
+    orderId: '1',
     orderNo: 'BK20240601001',
     customerName: '张建国',
     customerPhone: '138****5678',
@@ -20,6 +21,7 @@ export const installationList: Installation[] = [
   },
   {
     id: '2',
+    orderId: '2',
     orderNo: 'BK20240602002',
     customerName: '李美玲',
     customerPhone: '139****2345',
@@ -36,6 +38,7 @@ export const installationList: Installation[] = [
   },
   {
     id: '3',
+    orderId: '4',
     orderNo: 'BK20240528004',
     customerName: '陈秀英',
     customerPhone: '136****7890',
@@ -54,6 +57,7 @@ export const installationList: Installation[] = [
   },
   {
     id: '4',
+    orderId: '5',
     orderNo: 'BK20240525005',
     customerName: '刘振华',
     customerPhone: '137****3456',
@@ -72,6 +76,7 @@ export const installationList: Installation[] = [
   },
   {
     id: '5',
+    orderId: '7',
     orderNo: 'BK20240605007',
     customerName: '孙丽华',
     customerPhone: '135****6789',
@@ -89,6 +94,7 @@ export const installationList: Installation[] = [
   },
   {
     id: '6',
+    orderId: '6',
     orderNo: 'BK20240604006',
     customerName: '赵文博',
     customerPhone: '133****4567',

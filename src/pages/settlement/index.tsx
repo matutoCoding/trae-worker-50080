@@ -1,21 +1,24 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
-import { settlementList, getSettlementSummary } from '@/data/installations';
+import { useSettlementStore } from '@/store/settlements';
 import { SettlementItem } from '@/types';
 import styles from './index.module.scss';
 
 const SettlementPage: React.FC = () => {
   const [activeType, setActiveType] = useState<string>('all');
+  const settlements = useSettlementStore((s) => s.settlements);
+  const getSummary = useSettlementStore((s) => s.getSummary);
+  const completeSettlement = useSettlementStore((s) => s.completeSettlement);
 
   useDidShow(() => {
     console.log('[SettlementPage] 页面显示');
   });
 
-  const summary = useMemo(() => getSettlementSummary(), []);
+  const summary = useMemo(() => getSummary(), [settlements, getSummary]);
 
   const filteredRecords = useMemo<SettlementItem[]>(() => {
-    let result = [...settlementList];
+    let result = [...settlements];
     
     if (activeType !== 'all') {
       result = result.filter(item => item.type === activeType);
@@ -24,7 +27,7 @@ const SettlementPage: React.FC = () => {
     return result.sort((a, b) => 
       new Date(b.createTime).getTime() - new Date(a.createTime).getTime()
     );
-  }, [activeType]);
+  }, [activeType, settlements]);
 
   const getStatusLabel = (status: string) => {
     return status === 'completed' ? '已完成' : '待结算';
@@ -37,6 +40,21 @@ const SettlementPage: React.FC = () => {
 
   const handleRecordClick = (item: SettlementItem) => {
     console.log('[SettlementPage] 点击记录:', item.id);
+  };
+
+  const handleComplete = (e: React.MouseEvent, item: SettlementItem) => {
+    e.stopPropagation();
+    if (item.status === 'completed') return;
+    Taro.showModal({
+      title: '确认结算',
+      content: `确定将「${item.customerName} - ¥${item.amount}」标记为已完成？`,
+      success: (res) => {
+        if (res.confirm) {
+          completeSettlement(item.id);
+          Taro.showToast({ title: '结算完成', icon: 'success' });
+        }
+      }
+    });
   };
 
   return (
@@ -57,6 +75,13 @@ const SettlementPage: React.FC = () => {
             <Text className={styles.summaryLabel}>净利润</Text>
           </View>
         </View>
+        {summary.pendingCount > 0 && (
+          <View className={styles.pendingTip}>
+            <Text className={styles.pendingTipText}>
+              还有 {summary.pendingCount} 笔待结算，金额 ¥{summary.pendingIncome.toLocaleString()}
+            </Text>
+          </View>
+        )}
       </View>
 
       <View className={styles.filterSection}>
@@ -114,8 +139,16 @@ const SettlementPage: React.FC = () => {
                 <Text className={styles.recordRemarks}>{item.remarks}</Text>
               )}
               
-              <View style={{ marginTop: 12, textAlign: 'right' }}>
+              <View className={styles.recordFooter}>
                 <Text className={styles.recordTime}>{item.createTime}</Text>
+                {item.status !== 'completed' && (
+                  <View 
+                    className={styles.settleBtn}
+                    onClick={(e) => handleComplete(e, item)}
+                  >
+                    <Text>完成结算</Text>
+                  </View>
+                )}
               </View>
             </View>
           ))

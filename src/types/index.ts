@@ -46,6 +46,10 @@ export interface Order {
   scheduleTime?: string;
   engravingStartTime?: string;
   engravingCompleteTime?: string;
+  installScheduleTime?: string;
+  installCompleteTime?: string;
+  installId?: string;
+  settlementId?: string;
   remarks?: string;
 }
 
@@ -59,6 +63,7 @@ export type OrderStatus =
 
 export interface Installation {
   id: string;
+  orderId: string;
   orderNo: string;
   customerName: string;
   customerPhone: string;

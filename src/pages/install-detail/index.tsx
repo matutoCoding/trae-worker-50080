@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text } from '@tarojs/components';
 import Taro, { useRouter, useDidShow } from '@tarojs/taro';
-import { getInstallationById } from '@/data/installations';
+import { useInstallationStore } from '@/store/installations';
+import { useOrderStore } from '@/store/orders';
 import { Installation } from '@/types';
 import { INSTALL_STATUS_MAP } from '@/types';
 import styles from './index.module.scss';
@@ -9,6 +10,9 @@ import styles from './index.module.scss';
 const InstallDetailPage: React.FC = () => {
   const router = useRouter();
   const id = router.params.id || '1';
+  const getInstallationById = useInstallationStore((s) => s.getInstallationById);
+  const completeInstallation = useInstallationStore((s) => s.completeInstallation);
+  const updateOrderStatus = useOrderStore((s) => s.updateOrderStatus);
   
   const [installation, setInstallation] = useState<Installation | null>(null);
 
@@ -35,7 +39,7 @@ const InstallDetailPage: React.FC = () => {
       { title: '订单确认', time: installation.createTime, desc: '客户下单，订单已确认', active: true },
       { title: '刻制完成', time: installation.scheduledDate, desc: '墓碑刻制完成，等待安装', active: false },
       { title: '安装中', time: installation.installDate || '', desc: '安装工人正在现场施工', active: false },
-      { title: '安装完成', time: installation.completeDate || '', desc: '安装完成，客户验收', active: false }
+      { title: '安装完成', time: installation.completeDate || '', desc: '安装完成，客户验收，订单已交付', active: false }
     ];
 
     const statusIndex = {
@@ -59,18 +63,36 @@ const InstallDetailPage: React.FC = () => {
 
   const handleAction = () => {
     console.log('[InstallDetailPage] 主操作按钮');
-    const statusMap: Record<string, string> = {
-      pending: '确认安装',
-      scheduled: '开始安装',
-      installing: '完成安装',
-      completed: '查看详情'
-    };
-    Taro.showToast({ title: statusMap[installation.status] || '操作', icon: 'none' });
+    if (installation.status === 'scheduled') {
+      const updated = { ...installation, status: 'installing' as const, installDate: new Date().toISOString().split('T')[0] };
+      setInstallation(updated);
+      Taro.showToast({ title: '安装已开始', icon: 'success' });
+    } else if (installation.status === 'installing') {
+      Taro.showModal({
+        title: '完成安装',
+        content: '确认安装完成并交付给客户？订单将同步标记为已交付，自动进入待结算。',
+        success: (res) => {
+          if (res.confirm) {
+            completeInstallation(installation.id);
+            if (installation.orderId) {
+              updateOrderStatus(installation.orderId, 'delivered');
+            }
+            const finalInst = getInstallationById(installation.id);
+            setInstallation(finalInst);
+            Taro.showToast({ title: '安装完成，已交付', icon: 'success' });
+          }
+        }
+      });
+    } else if (installation.status === 'pending') {
+      if (installation.orderId) {
+        Taro.navigateTo({ url: `/pages/order-detail/index?id=${installation.orderId}` });
+      }
+    }
   };
 
   const getActionText = () => {
     const map: Record<string, string> = {
-      pending: '确认安装',
+      pending: '去订单详情预约',
       scheduled: '开始安装',
       installing: '完成安装',
       completed: '安装已完成'

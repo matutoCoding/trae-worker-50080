@@ -202,6 +202,99 @@
   }
 }
 
+.loadSection {
+  padding: 0 $page-padding $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.loadBlock {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.loadBlockTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+.loadCard {
+  background: $color-bg-page;
+  border-radius: $radius-sm;
+  padding: $spacing-sm $spacing-md;
+  margin-bottom: $spacing-sm;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.loadCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-xs;
+}
+
+.loadOperator {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.loadBadge {
+  padding: 4rpx 16rpx;
+  border-radius: $radius-xs;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+
+  &.loadBadgeSafe {
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+  }
+  &.loadBadgeWarning {
+    background: rgba(243, 156, 18, 0.1);
+    color: #f39c12;
+  }
+  &.loadBadgeDanger {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+  }
+}
+
+.loadSlots {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.loadSlot {
+  display: flex;
+  justify-content: space-between;
+  padding: 4rpx 0;
+}
+
+.loadSlotTime {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}
+
+.loadSlotOrder {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.loadEmpty {
+  font-size: $font-size-xs;
+  color: #27ae60;
+  padding: 4rpx 0;
+}
+
 .statusTag {
   padding: 6rpx 20rpx;
   border-radius: $radius-button;

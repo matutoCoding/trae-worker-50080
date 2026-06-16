@@ -152,6 +152,39 @@
   color: $color-text-tertiary;
 }
 
+.recordFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: $spacing-sm;
+}
+
+.settleBtn {
+  padding: 8rpx 24rpx;
+  background: linear-gradient(135deg, $color-gold 0%, $color-gold-dark 100%);
+  border-radius: $radius-button;
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+  
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.pendingTip {
+  margin-top: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  background: rgba(243, 156, 18, 0.1);
+  border-left: 6rpx solid #f39c12;
+  border-radius: $radius-sm;
+}
+
+.pendingTipText {
+  font-size: $font-size-xs;
+  color: #d68910;
+}
+
 .recordOrder {
   font-size: $font-size-xs;
   color: $color-text-tertiary;

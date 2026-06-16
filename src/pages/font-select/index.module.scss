@@ -1,0 +1,176 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: $spacing-xl;
+}
+
+.categoryNav {
+  background: $color-bg-card;
+  padding: $spacing-md $page-padding;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: $shadow-card;
+}
+
+.categoryList {
+  @include scroll-x-container;
+  white-space: nowrap;
+}
+
+.categoryItem {
+  @include scroll-x-item(auto);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60rpx;
+  padding: 0 $spacing-lg;
+  margin-right: $spacing-sm;
+  border-radius: $radius-button;
+  background: $color-bg-page;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-base;
+  
+  &.active {
+    background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+    color: $color-text-white;
+    font-weight: $font-weight-medium;
+  }
+  
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.fontList {
+  padding: $spacing-md $page-padding;
+}
+
+.fontCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+  
+  &.selected {
+    border: 2rpx solid $color-gold;
+    background: $color-bg-gold;
+  }
+  
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.fontHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.fontName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.fontCategory {
+  font-size: $font-size-xs;
+  color: $color-gold-dark;
+  background: $color-bg-gold;
+  padding: 6rpx 12rpx;
+  border-radius: $radius-xs;
+}
+
+.fontPreview {
+  background: $color-bg-page;
+  border-radius: $radius-sm;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  min-height: 150rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewText {
+  font-size: 56rpx;
+  color: $color-text-primary;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.fontFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fontPrice {
+  display: flex;
+  align-items: baseline;
+}
+
+.priceLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-right: 8rpx;
+}
+
+.priceValue {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-error;
+}
+
+.freeText {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-success;
+}
+
+.selectBtn {
+  @include button-reset;
+  height: 56rpx;
+  padding: 0 $spacing-lg;
+  background: linear-gradient(135deg, $color-gold 0%, $color-gold-dark 100%);
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  
+  &.selected {
+    background: $color-success;
+  }
+}
+
+.fontDesc {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  line-height: 1.6;
+  margin-bottom: $spacing-md;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-xl * 2 0;
+}
+
+.emptyIcon {
+  font-size: 120rpx;
+  opacity: 0.3;
+  margin-bottom: $spacing-md;
+}
+
+.emptyText {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+}

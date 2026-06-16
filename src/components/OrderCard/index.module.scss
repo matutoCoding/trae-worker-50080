@@ -1,0 +1,116 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+  
+  &:active {
+    transform: scale(0.99);
+    opacity: 0.95;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: $spacing-md;
+  border-bottom: 1rpx solid $color-divider;
+}
+
+.orderNo {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+.body {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-md 0;
+}
+
+.image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.tombstoneName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.customer {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.font {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.inscriptionRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8rpx;
+}
+
+.inscriptionLabel {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.inscriptionText {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  @include text-ellipsis;
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: $spacing-md;
+  border-top: 1rpx solid $color-divider;
+}
+
+.createTime {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.amount {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+}
+
+.amountLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.amountValue {
+  font-size: $font-size-lg;
+  color: $color-error;
+  font-weight: $font-weight-bold;
+}

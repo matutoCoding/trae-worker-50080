@@ -1,0 +1,203 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: $spacing-xl;
+}
+
+.summarySection {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  padding: $spacing-xl $page-padding;
+  padding-bottom: 120rpx;
+}
+
+.summaryTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+  margin-bottom: $spacing-lg;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+}
+
+.summaryCard {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  backdrop-filter: blur(10px);
+}
+
+.summaryValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  margin-bottom: 4rpx;
+}
+
+.summaryLabel {
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.summaryCard.profit {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(201, 169, 98, 0.9) 0%, rgba(176, 145, 74, 0.9) 100%);
+}
+
+.filterSection {
+  margin: -60rpx $page-padding 0;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+  position: relative;
+  z-index: 10;
+}
+
+.filterTabs {
+  display: flex;
+  gap: $spacing-sm;
+}
+
+.filterTab {
+  flex: 1;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-bg-page;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  transition: all $transition-base;
+  
+  &.active {
+    background: linear-gradient(135deg, $color-gold 0%, $color-gold-dark 100%);
+    color: $color-text-white;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.listSection {
+  padding: $spacing-md $page-padding;
+}
+
+.sectionTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+}
+
+.recordCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+  
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.recordHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.recordTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.recordAmount {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  
+  &.income {
+    color: $color-success;
+  }
+  
+  &.expense {
+    color: $color-error;
+  }
+}
+
+.recordMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recordCategory {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  background: $color-bg-page;
+  padding: 6rpx 12rpx;
+  border-radius: $radius-xs;
+}
+
+.recordTime {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.recordOrder {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: 1rpx solid $color-divider;
+}
+
+.recordRemarks {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-top: $spacing-sm;
+  line-height: 1.5;
+}
+
+.statusTag {
+  padding: 4rpx 12rpx;
+  border-radius: $radius-xs;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  
+  &.pending {
+    background: #fff3e0;
+    color: #f57c00;
+  }
+  
+  &.completed {
+    background: #e8f5e9;
+    color: #388e3c;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-xl * 2 0;
+}
+
+.emptyIcon {
+  font-size: 120rpx;
+  opacity: 0.3;
+  margin-bottom: $spacing-md;
+}
+
+.emptyText {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+}

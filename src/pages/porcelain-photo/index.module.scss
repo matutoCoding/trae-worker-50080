@@ -1,0 +1,339 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: 160rpx;
+}
+
+.banner {
+  height: 320rpx;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-white;
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '瓷';
+    position: absolute;
+    right: -40rpx;
+    bottom: -60rpx;
+    font-size: 360rpx;
+    font-weight: $font-weight-bold;
+    opacity: 0.05;
+  }
+}
+
+.bannerTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-sm;
+}
+
+.bannerDesc {
+  font-size: $font-size-sm;
+  opacity: 0.8;
+}
+
+.section {
+  padding: $spacing-md $page-padding;
+}
+
+.sectionTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  
+  &::before {
+    content: '';
+    width: 6rpx;
+    height: 32rpx;
+    background: linear-gradient(180deg, $color-gold 0%, $color-gold-dark 100%);
+    border-radius: 3rpx;
+  }
+}
+
+.uploadArea {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-xl $spacing-lg;
+  text-align: center;
+  box-shadow: $shadow-card;
+  border: 2rpx dashed $color-divider;
+  transition: all $transition-base;
+  
+  &:active {
+    border-color: $color-gold;
+    background: rgba(201, 169, 98, 0.05);
+  }
+}
+
+.uploadIcon {
+  font-size: 80rpx;
+  margin-bottom: $spacing-md;
+  opacity: 0.6;
+}
+
+.uploadText {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+  margin-bottom: 8rpx;
+}
+
+.uploadHint {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.sizeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+}
+
+.sizeCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  text-align: center;
+  box-shadow: $shadow-card;
+  border: 2rpx solid transparent;
+  transition: all $transition-base;
+  
+  &.active {
+    border-color: $color-gold;
+    background: rgba(201, 169, 98, 0.05);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.sizeIcon {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 0 auto $spacing-sm;
+  background: $color-bg-page;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .square & {
+    border-radius: $radius-sm;
+  }
+  
+  .oval & {
+    border-radius: 50%;
+  }
+}
+
+.sizeName {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.sizeSpec {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 8rpx;
+}
+
+.sizePrice {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $color-gold-dark;
+}
+
+.shapeRow {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.shapeItem {
+  flex: 1;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  text-align: center;
+  box-shadow: $shadow-card;
+  border: 2rpx solid transparent;
+  transition: all $transition-base;
+  
+  &.active {
+    border-color: $color-gold;
+    background: rgba(201, 169, 98, 0.05);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.shapeIcon {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 auto $spacing-sm;
+  background: $color-bg-page;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  
+  &.square {
+    border-radius: $radius-sm;
+  }
+  
+  &.oval {
+    border-radius: 50%;
+  }
+}
+
+.shapeName {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.colorRow {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.colorItem {
+  flex: 1;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  text-align: center;
+  box-shadow: $shadow-card;
+  border: 2rpx solid transparent;
+  transition: all $transition-base;
+  
+  &.active {
+    border-color: $color-gold;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.colorPreview {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 0 auto $spacing-sm;
+  border-radius: 50%;
+  
+  &.color {
+    background: linear-gradient(135deg, #d4a574 0%, #8b6914 50%, #d4a574 100%);
+  }
+  
+  &.black {
+    background: linear-gradient(135deg, #666 0%, #000 50%, #666 100%);
+  }
+}
+
+.colorName {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.infoCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  padding: $spacing-sm 0;
+  border-bottom: 1rpx solid $color-divider-light;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.infoLabel {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.infoValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.totalPrice {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-error;
+}
+
+.actionBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $color-bg-card;
+  padding: $spacing-md $page-padding;
+  padding-bottom: calc($spacing-md + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.priceInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.priceLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.priceValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-error;
+}
+
+.submitBtn {
+  width: 280rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $color-gold 0%, $color-gold-dark 100%);
+  color: $color-text-white;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  box-shadow: 0 8rpx 24rpx rgba(201, 169, 98, 0.3);
+  transition: all $transition-base;
+  
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}

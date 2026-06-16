@@ -1,0 +1,273 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: $spacing-xl;
+}
+
+.banner {
+  height: 280rpx;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: $color-text-white;
+  position: relative;
+  overflow: hidden;
+}
+
+.bannerTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-sm;
+}
+
+.bannerDesc {
+  font-size: $font-size-sm;
+  opacity: 0.8;
+}
+
+.serviceGrid {
+  padding: $spacing-md $page-padding;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+}
+
+.serviceCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg $spacing-md;
+  text-align: center;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.serviceIcon {
+  width: 96rpx;
+  height: 96rpx;
+  margin: 0 auto $spacing-md;
+  background: linear-gradient(135deg, rgba(201, 169, 98, 0.15) 0%, rgba(176, 145, 74, 0.15) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+}
+
+.serviceName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 8rpx;
+}
+
+.serviceDesc {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  line-height: 1.5;
+}
+
+.section {
+  padding: $spacing-md $page-padding;
+}
+
+.sectionTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  
+  &::before {
+    content: '';
+    width: 6rpx;
+    height: 32rpx;
+    background: linear-gradient(180deg, $color-gold 0%, $color-gold-dark 100%);
+    border-radius: 3rpx;
+  }
+}
+
+.caseList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.caseCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-card;
+  
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.caseImages {
+  display: flex;
+  height: 200rpx;
+}
+
+.caseImage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  
+  &.before {
+    background: #f5f5f5;
+    opacity: 0.7;
+  }
+  
+  &.after {
+    background: #e8f5e9;
+  }
+}
+
+.caseLabel {
+  position: absolute;
+  top: $spacing-sm;
+  left: $spacing-sm;
+  padding: 4rpx 12rpx;
+  border-radius: $radius-xs;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  
+  &.before {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+  }
+  
+  &.after {
+    background: rgba(56, 142, 60, 0.8);
+    color: #fff;
+  }
+}
+
+.caseContent {
+  padding: $spacing-md;
+}
+
+.caseTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 8rpx;
+}
+
+.caseInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.caseType {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  background: $color-bg-page;
+  padding: 4rpx 12rpx;
+  border-radius: $radius-xs;
+}
+
+.casePrice {
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  color: $color-error;
+}
+
+.formCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.formItem {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider-light;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.formLabel {
+  width: 160rpx;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  flex-shrink: 0;
+}
+
+.formValue {
+  flex: 1;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  text-align: right;
+}
+
+.formPlaceholder {
+  flex: 1;
+  font-size: $font-size-sm;
+  color: $color-text-placeholder;
+  text-align: right;
+}
+
+.formArrow {
+  margin-left: 8rpx;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.textareaItem {
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider-light;
+}
+
+.textareaLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.textarea {
+  width: 100%;
+  height: 160rpx;
+  padding: $spacing-sm;
+  background: $color-bg-page;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  box-sizing: border-box;
+}
+
+.submitBtn {
+  margin: $spacing-lg $page-padding 0;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, $color-gold 0%, $color-gold-dark 100%);
+  color: $color-text-white;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  box-shadow: 0 8rpx 24rpx rgba(201, 169, 98, 0.3);
+  
+  &:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}

@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, Textarea, Input } from '@tarojs/components';
-import Taro from '@tarojs/taro';
+import React from 'react';
+import { View, Text, Textarea } from '@tarojs/components';
+import Taro, { useDidShow } from '@tarojs/taro';
+import { useTypesettingStore } from '@/store/typesetting';
 import styles from './index.module.scss';
 
 const TypesettingPage: React.FC = () => {
-  const [mainText, setMainText] = useState<string>('先考张公讳建国之墓');
-  const [subText, setSubText] = useState<string>('生于一九五〇年  卒于二〇二四年');
-  const [fontSize, setFontSize] = useState<string>('medium');
-  const [align, setAlign] = useState<string>('center');
-  const [selectedFont, setSelectedFont] = useState<string>('欧体楷书');
+  const {
+    selectedFontName,
+    mainText,
+    subText,
+    fontSize,
+    align,
+    setMainText,
+    setSubText,
+    setFontSize,
+    setAlign
+  } = useTypesettingStore();
 
   const sizeOptions = [
     { key: 'small', label: '小号' },
@@ -65,7 +72,7 @@ const TypesettingPage: React.FC = () => {
       <View className={styles.previewSection}>
         <Text className={styles.sectionTitle}>碑文预览</Text>
         <View className={styles.previewBox}>
-          <Text className={styles.previewTitle}>{selectedFont}</Text>
+          <Text className={styles.previewTitle}>{selectedFontName}</Text>
           <View style={{ alignItems: getAlignClass(), width: '100%' }}>
             <Text 
               className={styles.previewText} 
@@ -111,7 +118,7 @@ const TypesettingPage: React.FC = () => {
             <View className={styles.fontSelectRow} onClick={handleFontSelect}>
               <Text className={styles.fontSelectLabel}>当前字体</Text>
               <View className={styles.fontSelectValue}>
-                <Text>{selectedFont}</Text>
+                <Text>{selectedFontName}</Text>
                 <Text className={styles.fontArrow}>›</Text>
               </View>
             </View>

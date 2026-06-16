@@ -8,6 +8,7 @@ export default defineAppConfig({
     'pages/typesetting/index',
     'pages/font-select/index',
     'pages/order-detail/index',
+    'pages/order-create/index',
     'pages/schedule/index',
     'pages/install-detail/index',
     'pages/porcelain-photo/index',

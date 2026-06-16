@@ -14,19 +14,16 @@ const SchedulePage: React.FC = () => {
   });
 
   const filteredSchedules = useMemo<ScheduleItem[]>(() => {
-    let result = [...scheduleList];
+    let result = scheduleList.filter(item => item.date === currentDate);
     
     if (activeType !== 'all') {
       result = result.filter(item => item.type === activeType);
     }
     
     return result.sort((a, b) => {
-      if (a.date !== b.date) {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-      }
       return a.startTime.localeCompare(b.startTime);
     });
-  }, [activeType]);
+  }, [activeType, currentDate]);
 
   const stats = useMemo(() => {
     const todaySchedules = scheduleList.filter(s => s.date === currentDate);

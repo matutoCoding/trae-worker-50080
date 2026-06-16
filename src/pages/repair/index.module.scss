@@ -43,10 +43,120 @@
   text-align: center;
   box-shadow: $shadow-card;
   transition: all $transition-base;
+  border: 2rpx solid transparent;
   
   &:active {
     transform: scale(0.98);
   }
+  
+  &.serviceCardActive {
+    border-color: $color-gold;
+    background: rgba(201, 169, 98, 0.08);
+  }
+}
+
+.formRequired {
+  color: $color-error;
+  margin-right: 4rpx;
+}
+
+.formValueWrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8rpx;
+}
+
+.formInput {
+  flex: 1;
+  font-size: $font-size-sm;
+  color: $font-size-primary;
+  text-align: right;
+  @include text-ellipsis;
+}
+
+.formValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+}
+
+.formPlaceholder {
+  font-size: $font-size-sm;
+  color: $color-text-placeholder;
+}
+
+.formArrow {
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.recordList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.recordCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.recordHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.recordService {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.recordStatus {
+  padding: 6rpx 16rpx;
+  border-radius: $radius-xs;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.recordBody {
+  padding: $spacing-sm 0;
+  border-top: 1rpx solid $color-divider-light;
+  border-bottom: 1rpx solid $color-divider-light;
+}
+
+.recordInfo {
+  display: flex;
+  padding: 8rpx 0;
+}
+
+.recordInfoLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  width: 100rpx;
+  flex-shrink: 0;
+}
+
+.recordInfoText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  flex: 1;
+  line-height: 1.6;
+}
+
+.recordFooter {
+  padding-top: $spacing-sm;
+  text-align: right;
+}
+
+.recordTime {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
 }
 
 .serviceIcon {

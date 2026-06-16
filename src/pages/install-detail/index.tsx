@@ -14,7 +14,7 @@ const InstallDetailPage: React.FC = () => {
 
   useDidShow(() => {
     console.log('[InstallDetailPage] 页面显示，id:', id);
-    const data = getInstallationById(Number(id));
+    const data = getInstallationById(String(id));
     setInstallation(data);
   });
 

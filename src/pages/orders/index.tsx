@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, ScrollView, Input } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
-import { orderList } from '@/data/orders';
 import OrderCard from '@/components/OrderCard';
-import { Order, OrderStatus } from '@/types';
+import { Order } from '@/types';
+import { useOrderStore } from '@/store/orders';
 import styles from './index.module.scss';
 
 const statusTabs = [
@@ -18,13 +18,14 @@ const statusTabs = [
 const OrdersPage: React.FC = () => {
   const [activeStatus, setActiveStatus] = useState<string>('all');
   const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const orders = useOrderStore((s) => s.orders);
 
   useDidShow(() => {
-    console.log('[OrdersPage] 页面显示');
+    console.log('[OrdersPage] 页面显示，订单数:', orders.length);
   });
 
   const filteredOrders = useMemo<Order[]>(() => {
-    let result = [...orderList];
+    let result = [...orders];
     
     if (activeStatus !== 'all') {
       result = result.filter(item => item.status === activeStatus);
@@ -42,16 +43,16 @@ const OrdersPage: React.FC = () => {
     return result.sort((a, b) => 
       new Date(b.createTime).getTime() - new Date(a.createTime).getTime()
     );
-  }, [activeStatus, searchKeyword]);
+  }, [activeStatus, searchKeyword, orders]);
 
   const stats = useMemo(() => {
     return {
-      total: orderList.length,
-      pending: orderList.filter(o => o.status === 'pending').length,
-      engraving: orderList.filter(o => o.status === 'engraving').length,
-      completed: orderList.filter(o => o.status === 'completed' || o.status === 'delivered').length
+      total: orders.length,
+      pending: orders.filter(o => o.status === 'pending').length,
+      engraving: orders.filter(o => o.status === 'engraving').length,
+      completed: orders.filter(o => o.status === 'completed' || o.status === 'delivered').length
     };
-  }, []);
+  }, [orders]);
 
   const handleStatusClick = (status: string) => {
     setActiveStatus(status);
@@ -63,7 +64,7 @@ const OrdersPage: React.FC = () => {
 
   const goToAddOrder = () => {
     console.log('[OrdersPage] 新增订单');
-    Taro.showToast({ title: '功能开发中', icon: 'none' });
+    Taro.navigateTo({ url: '/pages/order-create/index' });
   };
 
   return (

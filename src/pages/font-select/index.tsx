@@ -3,16 +3,20 @@ import { View, Text, ScrollView } from '@tarojs/components';
 import Taro, { useRouter, useDidShow } from '@tarojs/taro';
 import { fontCategories, fontList } from '@/data/fonts';
 import { Font } from '@/types';
+import { useTypesettingStore } from '@/store/typesetting';
 import styles from './index.module.scss';
 
 const FontSelectPage: React.FC = () => {
   const router = useRouter();
   const isSelectMode = router.params.select === '1';
   const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [selectedFontId, setSelectedFontId] = useState<string>('1');
+  
+  const { selectedFontId, selectedFontName, setFont } = useTypesettingStore();
+  const [currentFontId, setCurrentFontId] = useState<string>(selectedFontId);
 
   useDidShow(() => {
-    console.log('[FontSelectPage] 页面显示，选择模式:', isSelectMode);
+    console.log('[FontSelectPage] 页面显示，选择模式:', isSelectMode, '当前字体:', selectedFontName);
+    setCurrentFontId(selectedFontId);
   });
 
   const filteredFonts = useMemo<Font[]>(() => {
@@ -26,11 +30,13 @@ const FontSelectPage: React.FC = () => {
 
   const handleFontSelect = (font: Font) => {
     if (isSelectMode) {
-      setSelectedFontId(font.id);
+      setCurrentFontId(font.id);
+      setFont(font.id, font.name);
+      console.log('[FontSelectPage] 选择字体:', font.id, font.name);
       Taro.showToast({ title: `已选择${font.name}`, icon: 'success' });
       setTimeout(() => {
         Taro.navigateBack();
-      }, 1000);
+      }, 800);
     }
   };
 
@@ -67,7 +73,7 @@ const FontSelectPage: React.FC = () => {
           filteredFonts.map((font) => (
             <View 
               key={font.id} 
-              className={`${styles.fontCard} ${selectedFontId === font.id ? styles.selected : ''}`}
+              className={`${styles.fontCard} ${currentFontId === font.id ? styles.selected : ''}`}
               onClick={() => handleFontSelect(font)}
             >
               <View className={styles.fontHeader}>
@@ -98,9 +104,9 @@ const FontSelectPage: React.FC = () => {
                 </View>
                 {isSelectMode && (
                   <View 
-                    className={`${styles.selectBtn} ${selectedFontId === font.id ? styles.selected : ''}`}
+                    className={`${styles.selectBtn} ${currentFontId === font.id ? styles.selected : ''}`}
                   >
-                    <Text>{selectedFontId === font.id ? '已选择' : '选择'}</Text>
+                    <Text>{currentFontId === font.id ? '已选择' : '选择'}</Text>
                   </View>
                 )}
               </View>

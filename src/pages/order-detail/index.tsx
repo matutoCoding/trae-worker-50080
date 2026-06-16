@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image } from '@tarojs/components';
-import Taro, { useRouter } from '@tarojs/taro';
-import { getOrderById, getSchedulesByOrderNo } from '@/data/orders';
+import Taro, { useRouter, useDidShow } from '@tarojs/taro';
+import { getSchedulesByOrderNo } from '@/data/orders';
 import { Order, ORDER_STATUS_MAP } from '@/types';
 import StatusTag from '@/components/StatusTag';
+import { useOrderStore } from '@/store/orders';
 import styles from './index.module.scss';
 
 const OrderDetailPage: React.FC = () => {
   const router = useRouter();
   const [order, setOrder] = useState<Order | null>(null);
   const [schedules, setSchedules] = useState<any[]>([]);
+  const getOrderById = useOrderStore((s) => s.getOrderById);
 
-  useEffect(() => {
+  useDidShow(() => {
     const id = router.params.id;
     console.log('[OrderDetail] 订单ID:', id);
     if (id) {
@@ -20,9 +22,11 @@ const OrderDetailPage: React.FC = () => {
         setOrder(data);
         const scheds = getSchedulesByOrderNo(data.orderNo);
         setSchedules(scheds);
+      } else {
+        console.log('[OrderDetail] 未找到订单，id:', id);
       }
     }
-  }, [router.params.id]);
+  });
 
   const handleGoSchedule = () => {
     Taro.navigateTo({ url: '/pages/schedule/index' });

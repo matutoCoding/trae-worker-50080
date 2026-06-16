@@ -3,11 +3,13 @@ import { View, Text, Image } from '@tarojs/components';
 import Taro, { useRouter } from '@tarojs/taro';
 import { getTombstoneById } from '@/data/tombstones';
 import { Tombstone } from '@/types';
+import { useTypesettingStore } from '@/store/typesetting';
 import styles from './index.module.scss';
 
 const TombstoneDetailPage: React.FC = () => {
   const router = useRouter();
   const [tombstone, setTombstone] = useState<Tombstone | null>(null);
+  const setTombstoneInfo = useTypesettingStore((s) => s.setTombstone);
 
   useEffect(() => {
     const id = router.params.id;
@@ -21,12 +23,18 @@ const TombstoneDetailPage: React.FC = () => {
   }, [router.params.id]);
 
   const handleTypesetting = () => {
+    if (tombstone) {
+      setTombstoneInfo(tombstone.id, tombstone.name, tombstone.price, tombstone.image);
+    }
     Taro.navigateTo({ url: '/pages/typesetting/index' });
   };
 
   const handleOrder = () => {
     console.log('[TombstoneDetail] 立即下单');
-    Taro.showToast({ title: '下单功能开发中', icon: 'none' });
+    if (tombstone) {
+      setTombstoneInfo(tombstone.id, tombstone.name, tombstone.price, tombstone.image);
+      Taro.navigateTo({ url: `/pages/order-create/index?tombstoneId=${tombstone.id}` });
+    }
   };
 
   if (!tombstone) {

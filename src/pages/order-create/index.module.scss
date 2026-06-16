@@ -182,7 +182,14 @@
 .summaryRow {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: $spacing-sm 0;
+}
+
+.summaryLabelWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
 }
 
 .summaryLabel {
@@ -190,9 +197,35 @@
   color: $color-text-secondary;
 }
 
+.summaryRemark {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.summaryEmpty {
+  padding: $spacing-lg 0;
+  text-align: center;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
 .summaryValue {
   font-size: $font-size-sm;
   color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.otherFeeInput {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.amountInput {
+  width: 120rpx;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  text-align: right;
   font-weight: $font-weight-medium;
 }
 

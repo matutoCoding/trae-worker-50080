@@ -19,6 +19,12 @@ export interface Font {
   price: number;
 }
 
+export interface FeeDetail {
+  name: string;
+  amount: number;
+  remark?: string;
+}
+
 export interface Order {
   id: string;
   orderNo: string;
@@ -30,8 +36,16 @@ export interface Order {
   inscriptionText: string;
   status: OrderStatus;
   amount: number;
+  feeDetails?: FeeDetail[];
+  porcelainPhoto?: boolean;
+  porcelainPhotoSize?: string;
+  urgent?: boolean;
+  installService?: boolean;
+  cemetery?: string;
   createTime: string;
   scheduleTime?: string;
+  engravingStartTime?: string;
+  engravingCompleteTime?: string;
   remarks?: string;
 }
 
@@ -87,6 +101,7 @@ export type InstallStatus =
 
 export interface ScheduleItem {
   id: string;
+  orderId: string;
   orderNo: string;
   type: 'machine' | 'manual';
   content: string;

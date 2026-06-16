@@ -183,6 +183,25 @@
   color: $color-text-tertiary;
 }
 
+.statusActions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.completeBtn {
+  padding: 10rpx 24rpx;
+  background: linear-gradient(135deg, $color-gold 0%, $color-gold-dark 100%);
+  border-radius: $radius-button;
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+  
+  &:active {
+    opacity: 0.85;
+  }
+}
+
 .statusTag {
   padding: 6rpx 20rpx;
   border-radius: $radius-button;

@@ -1,20 +1,25 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text } from '@tarojs/components';
 import Taro, { useDidShow } from '@tarojs/taro';
-import { scheduleList } from '@/data/orders';
+import { useScheduleStore } from '@/store/schedules';
+import { useOrderStore } from '@/store/orders';
 import { ScheduleItem } from '@/types';
 import styles from './index.module.scss';
 
 const SchedulePage: React.FC = () => {
   const [activeType, setActiveType] = useState<string>('all');
   const [currentDate, setCurrentDate] = useState<string>('2024-06-03');
+  const schedules = useScheduleStore((s) => s.schedules);
+  const completeSchedule = useScheduleStore((s) => s.completeSchedule);
+  const updateOrderStatus = useOrderStore((s) => s.updateOrderStatus);
+  const getOrderById = useOrderStore((s) => s.getOrderById);
 
   useDidShow(() => {
-    console.log('[SchedulePage] 页面显示');
+    console.log('[SchedulePage] 页面显示，排期数量:', schedules.length);
   });
 
   const filteredSchedules = useMemo<ScheduleItem[]>(() => {
-    let result = scheduleList.filter(item => item.date === currentDate);
+    let result = schedules.filter(item => item.date === currentDate);
     
     if (activeType !== 'all') {
       result = result.filter(item => item.type === activeType);
@@ -23,7 +28,7 @@ const SchedulePage: React.FC = () => {
     return result.sort((a, b) => {
       return a.startTime.localeCompare(b.startTime);
     });
-  }, [activeType, currentDate]);
+  }, [activeType, currentDate, schedules]);
 
   const stats = useMemo(() => {
     return {
@@ -54,8 +59,41 @@ const SchedulePage: React.FC = () => {
   };
 
   const handleScheduleClick = (item: ScheduleItem) => {
-    console.log('[SchedulePage] 点击排期:', item.id);
-    Taro.showToast({ title: item.content, icon: 'none' });
+    console.log('[SchedulePage] 点击排期:', item.id, 'orderId:', item.orderId);
+    Taro.navigateTo({
+      url: `/pages/order-detail/index?id=${item.orderId}`
+    });
+  };
+
+  const handleComplete = (e: React.MouseEvent, item: ScheduleItem) => {
+    e.stopPropagation();
+    if (item.status === 'completed') return;
+    
+    Taro.showModal({
+      title: '确认完成',
+      content: `确定要将「${item.content}」标记为完成吗？`,
+      success: (res) => {
+        if (res.confirm) {
+          completeSchedule(item.id);
+          const order = getOrderById(item.orderId);
+          if (order) {
+            const allSchedules = useScheduleStore.getState().getSchedulesByOrderId(item.orderId);
+            const allCompleted = allSchedules.every(s => s.status === 'completed');
+            if (allCompleted && order.status === 'engraving') {
+              updateOrderStatus(item.orderId, 'completed');
+              Taro.showToast({ title: '任务已完成，订单状态已更新', icon: 'success' });
+            } else if (allCompleted && order.status === 'confirmed') {
+              updateOrderStatus(item.orderId, 'engraving');
+              Taro.showToast({ title: '任务已完成', icon: 'success' });
+            } else {
+              Taro.showToast({ title: '任务已完成', icon: 'success' });
+            }
+          } else {
+            Taro.showToast({ title: '任务已完成', icon: 'success' });
+          }
+        }
+      }
+    });
   };
 
   return (
@@ -138,8 +176,18 @@ const SchedulePage: React.FC = () => {
               
               <View className={styles.statusBar}>
                 <Text className={styles.operator}>操作：{item.operator}</Text>
-                <View className={`${styles.statusTag} ${styles[item.status]}`}>
-                  <Text>{getStatusLabel(item.status)}</Text>
+                <View className={styles.statusActions}>
+                  {item.status !== 'completed' && (
+                    <View 
+                      className={styles.completeBtn}
+                      onClick={(e) => handleComplete(e, item)}
+                    >
+                      <Text>完成</Text>
+                    </View>
+                  )}
+                  <View className={`${styles.statusTag} ${styles[item.status]}`}>
+                    <Text>{getStatusLabel(item.status)}</Text>
+                  </View>
                 </View>
               </View>
             </View>

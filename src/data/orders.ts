@@ -119,6 +119,7 @@ export const orderList: Order[] = [
 export const scheduleList: ScheduleItem[] = [
   {
     id: '1',
+    orderId: '1',
     orderNo: 'BK20240601001',
     type: 'machine',
     content: '福寿康宁碑 - 主碑刻字',
@@ -130,6 +131,7 @@ export const scheduleList: ScheduleItem[] = [
   },
   {
     id: '2',
+    orderId: '1',
     orderNo: 'BK20240601001',
     type: 'manual',
     content: '福寿康宁碑 - 花纹精雕',
@@ -141,6 +143,7 @@ export const scheduleList: ScheduleItem[] = [
   },
   {
     id: '3',
+    orderId: '7',
     orderNo: 'BK20240605007',
     type: 'machine',
     content: '天使守护碑 - 小天使雕像',
@@ -152,6 +155,7 @@ export const scheduleList: ScheduleItem[] = [
   },
   {
     id: '4',
+    orderId: '2',
     orderNo: 'BK20240602002',
     type: 'machine',
     content: '德高望重碑 - 碑文刻制',
@@ -163,6 +167,7 @@ export const scheduleList: ScheduleItem[] = [
   },
   {
     id: '5',
+    orderId: '2',
     orderNo: 'BK20240602002',
     type: 'manual',
     content: '德高望重碑 - 莲花底座雕刻',
@@ -174,6 +179,7 @@ export const scheduleList: ScheduleItem[] = [
   },
   {
     id: '6',
+    orderId: '4',
     orderNo: 'BK20240528004',
     type: 'machine',
     content: '双穴合葬碑 - 双碑刻字',
@@ -185,6 +191,7 @@ export const scheduleList: ScheduleItem[] = [
   },
   {
     id: '7',
+    orderId: '4',
     orderNo: 'BK20240528004',
     type: 'manual',
     content: '双穴合葬碑 - 边框雕花',

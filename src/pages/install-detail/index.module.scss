@@ -64,7 +64,7 @@
   display: flex;
   justify-content: space-between;
   padding: $spacing-sm 0;
-  border-bottom: 1rpx solid $color-divider-light;
+  border-bottom: 1rpx solid $color-divider;
   
   &:last-child {
     border-bottom: none;
@@ -123,7 +123,7 @@
   top: 24rpx;
   bottom: 0;
   width: 2rpx;
-  background: $color-divider-light;
+  background: $color-divider;
 }
 
 .timelineContent {

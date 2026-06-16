@@ -34,7 +34,7 @@ const TombstoneCard: React.FC<TombstoneCardProps> = ({ data, onClick }) => {
         </View>
       </View>
       <View className={styles.content}>
-        <Text className={styles.name}>{data.name}</text>
+        <Text className={styles.name}>{data.name}</Text>
         <View className={styles.specs}>
           {data.specs.slice(0, 2).map((spec, index) => (
             <Text key={index} className={styles.specItem}>{spec}</Text>

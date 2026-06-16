@@ -71,7 +71,7 @@
 .formInput {
   flex: 1;
   font-size: $font-size-sm;
-  color: $font-size-primary;
+  color: $color-text-primary;
   text-align: right;
   @include text-ellipsis;
 }
@@ -83,7 +83,7 @@
 
 .formPlaceholder {
   font-size: $font-size-sm;
-  color: $color-text-placeholder;
+  color: $color-text-tertiary;
 }
 
 .formArrow {
@@ -126,8 +126,8 @@
 
 .recordBody {
   padding: $spacing-sm 0;
-  border-top: 1rpx solid $color-divider-light;
-  border-bottom: 1rpx solid $color-divider-light;
+  border-top: 1rpx solid $color-divider;
+  border-bottom: 1rpx solid $color-divider;
 }
 
 .recordInfo {
@@ -307,7 +307,7 @@
   display: flex;
   align-items: center;
   padding: $spacing-md 0;
-  border-bottom: 1rpx solid $color-divider-light;
+  border-bottom: 1rpx solid $color-divider;
   
   &:last-child {
     border-bottom: none;
@@ -331,7 +331,7 @@
 .formPlaceholder {
   flex: 1;
   font-size: $font-size-sm;
-  color: $color-text-placeholder;
+  color: $color-text-tertiary;
   text-align: right;
 }
 
@@ -343,7 +343,7 @@
 
 .textareaItem {
   padding: $spacing-md 0;
-  border-bottom: 1rpx solid $color-divider-light;
+  border-bottom: 1rpx solid $color-divider;
 }
 
 .textareaLabel {

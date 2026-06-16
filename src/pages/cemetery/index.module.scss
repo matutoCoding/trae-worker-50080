@@ -32,7 +32,7 @@
 
 .searchText {
   font-size: $font-size-sm;
-  color: $color-text-placeholder;
+  color: $color-text-tertiary;
   flex: 1;
 }
 
@@ -160,7 +160,7 @@
   justify-content: space-between;
   margin-top: $spacing-md;
   padding-top: $spacing-md;
-  border-top: 1rpx solid $color-divider-light;
+  border-top: 1rpx solid $color-divider;
 }
 
 .cemeteryStats {

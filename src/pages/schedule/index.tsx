@@ -26,13 +26,12 @@ const SchedulePage: React.FC = () => {
   }, [activeType, currentDate]);
 
   const stats = useMemo(() => {
-    const todaySchedules = scheduleList.filter(s => s.date === currentDate);
     return {
-      total: todaySchedules.length,
-      processing: todaySchedules.filter(s => s.status === 'processing').length,
-      completed: todaySchedules.filter(s => s.status === 'completed').length
+      total: filteredSchedules.length,
+      processing: filteredSchedules.filter(s => s.status === 'processing').length,
+      completed: filteredSchedules.filter(s => s.status === 'completed').length
     };
-  }, [currentDate]);
+  }, [filteredSchedules]);
 
   const handleDateChange = (offset: number) => {
     const date = new Date(currentDate);
@@ -97,7 +96,7 @@ const SchedulePage: React.FC = () => {
       <View className={styles.statsRow}>
         <View className={styles.statCard}>
           <Text className={styles.statNum}>{stats.total}</Text>
-          <Text className={styles.statLabel}>今日任务</Text>
+          <Text className={styles.statLabel}>当前任务</Text>
         </View>
         <View className={styles.statCard}>
           <Text className={styles.statNum}>{stats.processing}</Text>

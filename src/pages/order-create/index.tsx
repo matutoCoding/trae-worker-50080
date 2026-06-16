@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Input, Textarea } from '@tarojs/components';
 import Taro, { useRouter, useDidShow } from '@tarojs/taro';
-import { tombstones } from '@/data/tombstones';
+import { tombstoneList } from '@/data/tombstones';
 import { fontList } from '@/data/fonts';
 import { cemeteryList } from '@/data/installations';
 import { useOrderStore } from '@/store/orders';
@@ -25,7 +25,7 @@ const OrderCreatePage: React.FC = () => {
   } = useTypesettingStore();
 
   const finalTombstoneId = preTombstoneId || storeTombstoneId;
-  const selectedTombstone = tombstones.find(t => t.id === finalTombstoneId);
+  const selectedTombstone = tombstoneList.find(t => t.id === finalTombstoneId);
   
   const [customerName, setCustomerName] = useState<string>('');
   const [customerPhone, setCustomerPhone] = useState<string>('');
@@ -39,9 +39,7 @@ const OrderCreatePage: React.FC = () => {
   const [inscriptionText, setInscriptionText] = useState<string>(
     [mainText, subText].filter(Boolean).join('\n')
   );
-  const [amount, setAmount] = useState<string>(
-    String(selectedTombstone?.price || storeTombstonePrice || 0)
-  );
+  const [otherFee, setOtherFee] = useState<string>('0');
   const [remarks, setRemarks] = useState<string>('');
 
   useDidShow(() => {
@@ -49,7 +47,6 @@ const OrderCreatePage: React.FC = () => {
     if (selectedTombstone) {
       setTombstoneName(selectedTombstone.name);
       setTombstoneImage(selectedTombstone.image);
-      setAmount(String(selectedTombstone.price));
     }
     setFontName(selectedFontName);
     setInscriptionText([mainText, subText].filter(Boolean).join('\n'));
@@ -64,20 +61,19 @@ const OrderCreatePage: React.FC = () => {
     if (!tombstoneName.trim()) return '请选择碑型';
     if (!fontName.trim()) return '请选择字体';
     if (!inscriptionText.trim()) return '请输入碑文内容';
-    const amountNum = Number(amount);
-    if (!amount || isNaN(amountNum) || amountNum <= 0) return '请输入有效的订单金额';
+    const otherFeeNum = Number(otherFee) || 0;
+    if (tombstonePrice + fontPrice + otherFeeNum <= 0) return '订单金额必须大于0';
     return null;
   };
 
   const handleSelectTombstone = () => {
     console.log('[OrderCreatePage] 选择碑型');
     Taro.showActionSheet({
-      itemList: tombstones.map(t => `${t.name} - ¥${t.price}`),
+      itemList: tombstoneList.map(t => `${t.name} - ¥${t.price}`),
       success: (res) => {
-        const tomb = tombstones[res.tapIndex];
+        const tomb = tombstoneList[res.tapIndex];
         setTombstoneName(tomb.name);
         setTombstoneImage(tomb.image);
-        setAmount(String(tomb.price));
       }
     });
   };
@@ -108,7 +104,7 @@ const OrderCreatePage: React.FC = () => {
       tombstoneImage: tombstoneImage,
       fontName: fontName.trim(),
       inscriptionText: inscriptionText.trim(),
-      amount: Number(amount),
+      amount: totalAmount,
       remarks: remarks.trim() || undefined
     });
 
@@ -125,10 +121,11 @@ const OrderCreatePage: React.FC = () => {
     Taro.navigateBack();
   };
 
-  const tombstonePrice = selectedTombstone?.price || storeTombstonePrice || Number(amount) || 0;
+  const tombstonePrice = selectedTombstone?.price || storeTombstonePrice || 0;
   const font = fontList.find(f => f.name === fontName);
   const fontPrice = font?.price || 0;
-  const totalAmount = tombstonePrice + fontPrice;
+  const otherFeeNum = Number(otherFee) || 0;
+  const totalAmount = tombstonePrice + fontPrice + otherFeeNum;
 
   return (
     <View className={styles.page}>
@@ -239,8 +236,8 @@ const OrderCreatePage: React.FC = () => {
               <Text style={{ fontSize: 24, color: '#999' }}>¥</Text>
               <Input
                 type='digit'
-                value={amount}
-                onInput={(e) => setAmount(e.detail.value)}
+                value={otherFee}
+                onInput={(e) => setOtherFee(e.detail.value)}
                 style={{ 
                   width: 120, 
                   fontSize: 28, 

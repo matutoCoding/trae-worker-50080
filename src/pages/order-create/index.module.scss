@@ -57,7 +57,7 @@
   align-items: center;
   min-height: 96rpx;
   padding: $spacing-sm 0;
-  border-bottom: 1rpx solid $color-divider-light;
+  border-bottom: 1rpx solid $color-divider;
   
   &:last-child {
     border-bottom: none;
@@ -99,7 +99,7 @@
 
 .formPlaceholder {
   font-size: $font-size-sm;
-  color: $color-text-placeholder;
+  color: $color-text-tertiary;
   text-align: right;
 }
 
@@ -110,7 +110,7 @@
 
 .textareaItem {
   padding: $spacing-md 0;
-  border-bottom: 1rpx solid $color-divider-light;
+  border-bottom: 1rpx solid $color-divider;
   
   &:last-child {
     border-bottom: none;
